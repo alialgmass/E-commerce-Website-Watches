@@ -1,0 +1,1 @@
+<?php /**PATH E:\progects\laravel\E-commerce-Website-Watches\resources\views/tools/buy_btn.blade.php ENDPATH**/ ?>

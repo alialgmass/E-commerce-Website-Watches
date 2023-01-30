@@ -1,0 +1,1 @@
+<?php /**PATH E:\progects\laravel\E-commerce-Website-Watches\resources\views/admin/includes/alerts/success.blade.php ENDPATH**/ ?>
