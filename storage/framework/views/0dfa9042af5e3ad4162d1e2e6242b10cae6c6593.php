@@ -1,5 +1,6 @@
 <html/>
 <head>
+
         <meta charset="utf-8">
         <title>WATCH - Store</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -18,21 +19,66 @@
         <link href="<?php echo e(asset('asset/lib/owlcarousel/assets/owl.carousel.min.css')); ?>" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <?php echo app('Illuminate\Foundation\Vite')([ 'resources/js/app.js']); ?>
+      
         <link href="<?php echo e(asset('asset/css/style.css')); ?>" rel="stylesheet">
     <!-- Scripts -->
    
     </head>
 
     <body>
+
+   
+
         <!-- Nav Start -->
         <div id="nav">
             <div class="container-fluid">
                 <div id="logo" class="pull-left">
                     <a href="<?php echo e(route('index')); ?>"><img src="<?php echo e(asset('asset/img/logo.png')); ?>" alt="Logo" /></a>
                 </div>
-<?php echo $__env->yieldContent('navitem'); ?>
-    
+
+               <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                       
+                        <li class=""><a  href="<?php echo e(route('index')); ?>">Home</a></li>
+                        <li><a href="">Cart</a></li>
+                  
+                   
+                    <?php if(auth()->guard()->guest()): ?>
+                            <?php if(Route::has('login')): ?>
+                                <li class="">
+                                    <a class="" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php if(Route::has('register')): ?>
+                                <li class="">
+                                    <a class="" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
+                                </li>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                  <?php echo e(explode(" ",Auth::user()->name)[0]); ?>
+
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        <?php echo e(__('Logout')); ?>
+
+                                    </a>
+
+                                    <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                                        <?php echo csrf_field(); ?>
+                                    </form>
+                                </div>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
+
             </div>
         </div>
         <!-- Nav End -->

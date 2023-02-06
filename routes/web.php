@@ -25,11 +25,15 @@ Route::get('/product', [ProductController::class,'all_prouduct'])->name('show-al
 
 //cart
 Route::group(['middleware'=>'auth'],function () {
-    Route::post('/cart/{id}', [OrderController::class,'create'])->name('add-in-cart');  
+    Route::get('/cart/create/{id}', [CartController::class,'create'])->name('add-in-cart'); 
+    Route::get('/cart/', [CartController::class,'index'])->name('cart-index'); 
+    Route::post('/cart/store', [CartController::class,'store'])->name('cart-store');  
+
 });
 
 //order
 Route::group(['middleware'=>'auth'],function () {
+    Route::get('/checkout/', [OrderController::class,'checkout'])->name('checkout'); 
     Route::post('/order', [OrderController::class,'store'])->name('add-in-order');
 });
 

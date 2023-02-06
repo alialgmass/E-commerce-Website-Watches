@@ -26,12 +26,12 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
-    {
+   // public function create($id)
+   // {
         //
-        $data=Product::find($id);
-        return view('cart',\compact('data'));
-    }
+      //  $data=Product::find($id);
+      //  return view('user.cart.create',\compact('data'));
+   // }
 
     /**
      * Store a newly created resource in storage.
@@ -41,9 +41,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $product=Product::find($request->id);
-$order_information=Order_information::where('can_add_to',0);
+     
+
 
     }
 
@@ -56,6 +55,11 @@ $order_information=Order_information::where('can_add_to',0);
     public function show($id)
     {
         //
+    }
+    public function checkout ()
+    {
+        //
+        return view('user.checkout&pay.checkout');
     }
 
     /**

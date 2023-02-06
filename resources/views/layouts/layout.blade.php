@@ -1,5 +1,6 @@
 <html/>
 <head>
+
         <meta charset="utf-8">
         <title>WATCH - Store</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -18,21 +19,64 @@
         <link href="{{asset('asset/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        @vite([ 'resources/js/app.js'])
+      
         <link href="{{asset('asset/css/style.css')}}" rel="stylesheet">
     <!-- Scripts -->
    
     </head>
 
     <body>
+
+   
+
         <!-- Nav Start -->
         <div id="nav">
             <div class="container-fluid">
                 <div id="logo" class="pull-left">
                     <a href="{{route('index')}}"><img src="{{asset('asset/img/logo.png')}}" alt="Logo" /></a>
                 </div>
-@yield('navitem')
-    
+
+               <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                       
+                        <li class=""><a  href="{{route('index')}}">Home</a></li>
+                        <li><a href="">Cart</a></li>
+                  
+                   
+                    @guest
+                            @if (Route::has('login'))
+                                <li class="">
+                                    <a class="" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="">
+                                    <a class="" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                  {{explode(" ",Auth::user()->name)[0] }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </nav>
+
             </div>
         </div>
         <!-- Nav End -->

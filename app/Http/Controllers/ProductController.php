@@ -2,27 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
+
 class ProductController extends Controller
 {
     //
-    public function index(){
-        try{
-             $data=Product::limit(4)->get();
+    public function index()
+    {
+        try {
+            $data = Product::limit(4)->get();
 
-            return \view('prouduct',['data'=>$data]);
-        }catch(Exception $ex){
-            return \view('prouduct');
+            return \view('user.index', ['data' => $data]);
+        } catch (Exception $ex) {
+            return \view('user.index');
         }
-       
+
     }
-    public function show($id){
-        $data=Product::find($id);
-        return \view('singleproduct',['data'=>$data]);
+    public function show($id)
+    {
+        $data = Product::find($id);
+        return \view('user.product.show', ['data' => $data]);
     }
-    public function all_prouduct(){
-        $data=Product::all();
-        return \view('all_products',['data'=>$data]);
+    public function all_prouduct()
+    {
+        $data = Product::all();
+        return \view('user.product.index', ['data' => $data]);
     }
 }
